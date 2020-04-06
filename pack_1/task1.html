@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 1</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="task2.css">
+
+        <!-- В бесконечном цикле делается запрос на ввод двух чисел (два отдельных prompt). Числа сравниваются и выводится одна из трѐх фраз: «числа равны», 
+    «первое число меньше», «второе число меньше». Если пользователь ввѐл не число, выводится фраза 
+    «первый ввод – не число» (или «второй ввод – не число»), и выполнение скрипта прекращается. --> 
+
+    </head>
+
+<body>
+
+  <p>Task no. 1</p>
+
+  <script>
+    let first, second;
+    while(true)
+    {
+      first = prompt("enter the first number");
+      second = prompt("enter the second number");
+
+      first = Number(first);
+      second = Number(second); 
+
+      if(isNaN(first)) {
+        alert("first var is not a number");
+        break;
+      }
+        
+      if( isNaN(second) ){
+        alert("second var is not a number");
+        break;
+      }
+
+      if( first > second)
+        alert("first number is greater than second");
+      else if( first == second)
+        alert("numbers are equal")
+      else if( first < second)
+        alert("first number is less than second")
+        
+    }
+  </script>
+
+  <p>Task is complete.</p>
+
+</body>
+
+</html>

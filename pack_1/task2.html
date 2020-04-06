@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>task no. 2</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="task2.css">
+
+        <!--  
+            Многоквартирный дом характеризуется следующими тремя показателями: 
+            этажность, число подъездов, количество квартир на этаже. Скрипт запрашивает эти показатели и номер квартиры. 
+            Выводится номер подъезда, в котором находится указанная квартира. При вводе некорректных данных предусмотреть 
+            генерацию исключительных ситуаций.
+        -->
+
+    </head>
+
+    <script>
+        function entranceNumberCalculation() {
+            let entrance_field = document.getElementById('entrance');
+
+            let maxFloorField = document.getElementById('max_floor'),
+                maxEntranceField = document.getElementById('max_entrance'),
+                maxApartmentsOnFloorField = document.getElementById('max_apartments_on_floor');
+  
+            maxApartments = maxFloorField.value * maxEntranceField.value * maxApartmentsOnFloorField.value;
+  
+
+            let roomField = document.getElementById('room_number'),
+                room = roomField.value;
+
+            maxApartments = maxFloorField.value * maxEntranceField.value * maxApartmentsOnFloorField.value;
+        
+            if (room > maxApartments) {
+                alert("apartment of such number can't be in this house");
+                return;
+            }
+
+            if(isNaN(Number(maxFloorField.value)) || isNaN(Number(maxEntranceField.value)) || isNaN(Number(maxApartmentsOnFloorField.value)) || isNaN(Number(roomField.value))) {
+                alert("your input is incorrect");
+                return;
+            }
+
+            entrance = Math.ceil(room / (maxFloorField.value * maxApartmentsOnFloorField.value));
+
+            if( isNaN(Number(entrance)) ) {
+                alert("an error occurred while calculating");
+                return;
+            }
+            document.getElementById("entrance").innerText = entrance.toString();
+
+        }
+    </script>
+
+
+    <div  href="" class="container-input">
+            <div  ><input type="text"  id="room_number" value=""> 
+                <p>Номер квартиры</p>>
+            </div>
+        </div>
+
+    <div class="page-container">
+            <div class="triple-page-container-inner">
+                <div  href="" class="container-input">
+            
+                    <div  ><input type="text" id="max_floor" value="">
+                        <p >Этажность</p>>
+                    </div>
+                </div>
+            </div>
+            <div class="triple-page-container-inner">
+                <div  href="" class="container-input">
+                        <div ><input type="text" id="max_entrance" value="">  <p >Число подъездов</p>></div>
+                </div>
+            </div>
+            <div class="triple-page-container-inner">
+                <div  href="" class="container-input">
+                        <div ><input type="text" value=""  id="max_apartments_on_floor">  <p>Квартир на эатже</p>></div>
+                </div>
+            </div>
+    </div>
+
+</div>
+    <button class=submit_btn onclick="entranceNumberCalculation()">submit</button>
+</div>
+
+<div class="container-input"><p>Номер подъезда, в котором находится указанная квартира: </p> <p id="entrance">text</p></div>
+    
+
+
+</html>
