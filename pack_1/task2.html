@@ -18,45 +18,39 @@
 
     <script>
         function entranceNumberCalculation() {
-            let entrance_field = document.getElementById('entrance');
 
-            let maxFloorField = document.getElementById('max_floor'),
-                maxEntranceField = document.getElementById('max_entrance'),
-                maxApartmentsOnFloorField = document.getElementById('max_apartments_on_floor');
+            let floor = document.getElementById('floor_input'),
+                entrance = document.getElementById('entrance_input'),
+                flatsOnFloor = document.getElementById('flats_on_floor_input'),
+                flat = document.getElementById('flat_input');
   
-            maxApartments = maxFloorField.value * maxEntranceField.value * maxApartmentsOnFloorField.value;
-  
-
-            let roomField = document.getElementById('room_number'),
-                room = roomField.value;
-
-            maxApartments = maxFloorField.value * maxEntranceField.value * maxApartmentsOnFloorField.value;
+            maxFlatOnFloor = floor.value * entrance.value * flatsOnFloor.value;
         
-            if (room > maxApartments) {
+            if (flat.value > maxFlatOnFloor) {
                 alert("apartment of such number can't be in this house");
                 return;
             }
 
-            if(isNaN(Number(maxFloorField.value)) || isNaN(Number(maxEntranceField.value)) || isNaN(Number(maxApartmentsOnFloorField.value)) || isNaN(Number(roomField.value))) {
+            if(isNaN(Number(floor.value)) || isNaN(Number(entrance.value)) || isNaN(Number(flatsOnFloor.value)) || isNaN(Number(flat.value))) {
                 alert("your input is incorrect");
                 return;
             }
 
-            entrance = Math.ceil(room / (maxFloorField.value * maxApartmentsOnFloorField.value));
+            let entrance_result = Math.ceil(flat.value / (floor.value * flatsOnFloor.value));
 
-            if( isNaN(Number(entrance)) ) {
+            if( isNaN(Number(entrance_result)) ) {
                 alert("an error occurred while calculating");
                 return;
             }
-            document.getElementById("entrance").innerText = entrance.toString();
+            document.getElementById("entrance").innerText = entrance_result.toString();
 
         }
     </script>
 
 
     <div  href="" class="container-input">
-            <div  ><input type="text"  id="room_number" value=""> 
-                <p>Номер квартиры</p>>
+            <div  ><input type="text"  id="flat_input" value=""> 
+                <p>Flat no.</p>>
             </div>
         </div>
 
@@ -64,28 +58,28 @@
             <div class="triple-page-container-inner">
                 <div  href="" class="container-input">
             
-                    <div  ><input type="text" id="max_floor" value="">
-                        <p >Этажность</p>>
+                    <div  ><input type="text" id="floor_input" value="">
+                        <p>number of storeys</p>>
                     </div>
                 </div>
             </div>
             <div class="triple-page-container-inner">
                 <div  href="" class="container-input">
-                        <div ><input type="text" id="max_entrance" value="">  <p >Число подъездов</p>></div>
+                        <div ><input type="text" id="entrance_input" value="">  <p >number of entrances</p>></div>
                 </div>
             </div>
             <div class="triple-page-container-inner">
                 <div  href="" class="container-input">
-                        <div ><input type="text" value=""  id="max_apartments_on_floor">  <p>Квартир на эатже</p>></div>
+                        <div ><input type="text" value=""  id="flats_on_floor_input">  <p>apartments per floor</p>></div>
                 </div>
             </div>
     </div>
 
 </div>
-    <button class=submit_btn onclick="entranceNumberCalculation()">submit</button>
+    <button class="submit_btn" onclick="entranceNumberCalculation()">submit</button>
 </div>
 
-<div class="container-input"><p>Номер подъезда, в котором находится указанная квартира: </p> <p id="entrance">text</p></div>
+<div class="container-input"><p>Entrance number in which the indicated flat is located: </p> <p id="entrance"></p></div>
     
 
 

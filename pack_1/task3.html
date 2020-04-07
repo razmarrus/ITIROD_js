@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 3</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+
+        <!-- Вычисление и вывод i-го числа Фибоначчи, где параметр i вводится пользователем. 
+            При вводе некорректных данных предусмотреть генерацию исключительной ситуации. --> 
+
+    </head>
+
+<body>
+
+  <p>Task no. 3</p>
+
+  <script>
+        //function fib_n()
+        {
+            while(true){
+                let n = prompt("enter index of fibonacci number");
+                
+                if(isNaN(Number(n))) {
+                    alert("your input is not a number");
+                    continue;
+                }
+                else if (Number(n) < 1){
+                    alert("your input is too small");
+                    continue;
+                }
+                
+                if (n <= 2) 
+                {
+                    alert("answer is: 1");
+                    continue;
+                }
+                let x = 1, y = 1, answer = 0;
+                for (let i = 2; i < n; i++)
+                {
+
+                try {
+                    answer = x + y;
+                }
+                catch (e) {
+                    alert("fibonacci number is too large");
+                        continue;   
+                }
+
+                    x = y;
+                    y = answer;
+                }
+
+                if(isNaN(Number(answer)) || !isFinite(Number(answer))) {
+                    alert("fibonacci number is too large");
+                    continue;
+                }
+
+                alert(`answer is: ${answer}`);
+            
+            }
+        }
+
+  </script>
+
+  <p>Task is complete.</p>
+
+</body>
+
+</html>

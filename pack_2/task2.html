@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 2</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+
+    </head>
+
+<body>
+
+
+<p>Task no. 2</p>
+
+<script>
+
+    while(true)
+    {
+        let target_lenght = prompt("enter target lenght");
+        let str_replace = prompt("enter your text for replace");
+
+
+        var tags = "Лето!, зима, осень 2009 года."
+        let re_punct= /[,.!?;:()]/; 
+        //tags = tags.replace(/,/g, ''); //удаляем запятые
+        tags = tags.replace(re_punct, '');
+
+        var re = /\s*,\s*/
+    
+        var tagList = tags.split(/\s+/);
+
+        for(key in tagList){
+            if(tagList[key].length  == target_lenght)
+                alert(tagList[key])
+        }
+    }
+
+</script>
+
+<p>Task is complete.</p>
+
+</body>
+
+</html>
+
+
