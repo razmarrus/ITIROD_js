@@ -20,21 +20,36 @@
     {
         let target_lenght = prompt("enter target lenght");
         let str_replace = prompt("enter your text for replace");
+        str_replace = " "+ str_replace + " ";
 
+        let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text_copy = text;
+        let re_punct= /[,.!?;:()]/; ///[,.!?;:()\s*,\s*]/ 
+        
+        //text = text.replace(/,/g, ''); //удаляем запятые
+        //let re = /\s*,\s*/
 
-        var tags = "Лето!, зима, осень 2009 года."
-        let re_punct= /[,.!?;:()]/; 
-        //tags = tags.replace(/,/g, ''); //удаляем запятые
-        tags = tags.replace(re_punct, '');
+        let max_len = Number(text.length) * 2;
 
-        var re = /\s*,\s*/
-    
-        var tagList = tags.split(/\s+/);
-
-        for(key in tagList){
-            if(tagList[key].length  == target_lenght)
-                alert(tagList[key])
+        for (let i = 0;  i < max_len; i++ )
+        {
+            text = text.replace(re_punct, ' ');
         }
+
+        let tagList = text.split( /\s+/);
+        for(key in tagList){
+            if(tagList[key].length  == target_lenght){
+
+                let junk = String("\\s+" + String(tagList[key]) + "\\s+");
+                let buffer = new RegExp(junk);
+                alert(buffer);
+
+                text = text.replace(buffer, str_replace);
+                }
+        }
+
+        alert(`text before changing ${text_copy}`)
+        alert(`text after changing ${text}`)
     }
 
 </script>

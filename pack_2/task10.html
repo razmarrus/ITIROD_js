@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 10</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+
+    </head>
+
+<body>
+
+
+<p>Task no. 10</p>
+
+<script>
+
+    while(true)
+    {
+        let text = prompt("enter text");
+
+        //let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text_copy = text;
+        let re_punct= /[,.!?;:()]/; ///[,.!?;:()\s*,\s*]/ 
+        
+        //text = text.replace(/,/g, ''); //удаляем запятые
+        //let re = /\s*,\s*/
+
+        let double_len = Number(text.length) * 2;
+
+        for (let i = 0;  i < double_len; i++ )
+        {
+            text = text.replace(re_punct, ' ');
+        }
+
+        let shortest_arr = [], longest_arr = [];
+        let max_lenght = 0, min_lenght = 10000;
+
+        let tagList = text.split( /\s+/);
+        for(key in tagList) {
+
+            if( tagList[key].length == min_lenght)
+                shortest_arr.push(tagList[key])
+            else if ( tagList[key].length < min_lenght && tagList[key] != " " && tagList[key] != ""){
+                shortest_arr.length = 0;
+                shortest_arr.push(tagList[key]);
+                min_lenght = tagList[key].length;
+            }
+
+            if( tagList[key].length == max_lenght)
+                longest_arr.push(tagList[key])
+            else if ( tagList[key].length > max_lenght && tagList[key] != " " && tagList[key] != ""){
+                longest_arr.length = 0;
+                longest_arr.push(tagList[key]);
+                max_lenght = tagList[key].length;
+            }
+        }
+
+        alert(`the shortest words is ${min_lenght} symbols lenght: \n${shortest_arr}`)
+        alert(`the longest words is ${max_lenght} symbols lenght: \n${longest_arr}`)
+
+    }
+
+</script>
+
+<p>Task is complete.</p>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 4</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+
+    </head>
+
+<body>
+
+
+<p>Task no. 4</p>
+
+<script>
+
+    while(true)
+    {
+        let target_symbol = prompt("enter target symbol");
+        let str_replace = prompt("enter your text for replace");
+        if(target_symbol.length > 1)
+        {
+            alert("incurent input");
+            continue;
+        }
+
+        let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text_copy = text;
+        
+        let max_len = Number(text.length);
+
+
+        for (let i = 0;  i < max_len; i++ )
+        {
+            if(text[i] == target_symbol)
+            {
+                let line_begining = text.substring(0,i + 1);
+                let line_ending = text.substring(i + 1);
+                text = line_begining + str_replace + line_ending;
+                max_len += str_replace.length
+                i += str_replace.length
+            }
+
+        }
+
+        alert(`text before changing ${text_copy}`)
+        alert(`text after changing ${text}`)
+    }
+
+</script>
+
+<p>Task is complete.</p>
+
+</body>
+
+</html>
+
+
