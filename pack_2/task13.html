@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 13</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+
+    </head>
+
+<body>
+
+
+<p>Task no. 13</p>
+
+<script>
+
+    //function entranceNumberCalculation() 
+
+    while(true)
+    {
+        let text = prompt("enter text");  //"qwe werty erw yq zzzz"; 
+        let words_arr = [];
+        let main_chain = [];
+    
+        let re_punct= /[,.!?;:()]/;
+        let double_len = Number(text.length) * 2;
+
+        for (let i = 0;  i < double_len; i++ )  //убираем знаки припинания
+            text = text.replace(re_punct, ' ');
+        
+
+        let tagList = text.split( /\s+/);
+        for(key in tagList)
+            words_arr.push(tagList[key])
+
+        let n = words_arr.length
+
+        let words_matrix=new Array(n);
+        let chain_matrix=new Array(n)
+        for (var i=0; i<n; i++) {  //создаем двумерные массивы
+	        words_matrix[i]=new Array(n);
+            chain_matrix[i]= [];
+        }
+
+
+        for(let i = 0; i < n; i++)
+        {
+            for(let j = 0; j < n; j++)
+            {
+                let num = i + j
+                while(num >= words_arr.length)
+                    num = num - words_arr.length    //первое слово - самое важное
+                words_matrix[i][j] = words_arr[num]  //заполняем массив всеми вариантами текста (каждая строка двигается на одно слово)
+            }
+        }
+
+        main_chain.push(words_arr[0])
+        words_arr.shift()
+        //alert(chain_matrix)
+        for(let i =0; i < n; i++)
+        {
+            chain_matrix[i].push(words_matrix[i][0])   //первые слова в результирующий массив
+            words_matrix[i].shift()
+        }
+
+        
+        /*for(i in words_arr)  //только для исходного текста
+        {
+            let last_word_main_chain = String(main_chain[main_chain.length - 1])  //ключевое слово
+            for(key in words_arr)
+            {
+                let key_words_arr = String(words_arr[key])
+
+                if(last_word_main_chain[last_word_main_chain.length -1] == key_words_arr[0]){  //если последняя буква ключевого слова == начальная буква слова из строки
+                    main_chain.push(key_words_arr)
+                    let del_index = words_arr.indexOf(key_words_arr)
+                    words_arr.slice(del_index, del_index)  //удаляем поюзаное слово
+                    break;
+                }
+            }
+        }*/
+
+        //для вариантов, начинающихся с разных слов
+        for(let i = 0; i < n -1; i++)
+        {
+            let words_matrix_layer = words_matrix[i];
+            for(let k = 0; k < n -1; k++){
+
+                for(let x = 0; x < words_matrix_layer.length; x++)
+                {
+                    let last_word_current_layer = chain_matrix[i][chain_matrix[i].length -1];//= chain_matrix[i][buffer]
+                    let current_key_word = words_matrix_layer[x];
+
+                    if(last_word_current_layer[last_word_current_layer.length -1] == current_key_word[0])
+                    {
+                        chain_matrix[i].push(current_key_word)
+                        words_matrix_layer.splice(x, 1)
+
+                        break;
+                    }
+                }
+                
+            }
+        
+        }
+
+        let max_chain_len = 0;
+        for(let i =0; i < chain_matrix.length; i++)
+        {
+            if(max_chain_len < chain_matrix[i].length)
+                max_chain_len = chain_matrix[i].length;
+        }    
+            //alert(chain_matrix[i].length)
+        
+        for(let i = 0; i < chain_matrix.length; i++)
+        {
+            if(max_chain_len == chain_matrix[i].length) 
+                alert(`chain of max len: ${chain_matrix[i]}`)
+                //max_chain_len = chain_matrix[i].length;
+        }    
+
+       // alert(`MAIN CHAIN ${main_chain}`)
+        
+    }
+
+</script>
+
+<p>Task is complete.</p>
+
+</body>
+
+</html>
+
+
