@@ -18,20 +18,12 @@
 
     while(true)
     {
-        //let target_symbol = prompt("enter target symbol");
-        //let str_replace = prompt("enter your text for replace");
-        /*if(target_symbol.length > 1)
-        {
-            alert("incurent input");
-            continue;
-        }*/
-
-        let text = "= this is 234 som5e rand%om() te[]t@ ";
+        let text = prompt("enter your text");//"= this is 234 som5e rand%om() te[]t@ ";
         let text_copy = text;
         
-        let reg = /[^A-Za-z\s_]/;
+        let reg = /[^A-Za-z\s_]/; //если текст не буква или пробел
         for(let i = 0; i < text.length; i++)
-            text = text.replace(reg, "");
+            text = text.replace(reg, "");  //заменяем
 
         alert(`text before changing ${text_copy}`)
         alert(`text after changing ${text}`)

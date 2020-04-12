@@ -23,9 +23,9 @@
         let vowels_counter = 0, consonants_counter = 0;
         for (let i = 0;  i < text.length; i++ ){
 
-            if( /[AEIOYaeiouy]/.test(text[i]))
+            if( /[AEIOYaeiouy]/.test(text[i]))  //все гласные
                 vowels_counter++;
-            else if( /[B-DF-HJ-NP-TV-XZb-df-hj-np-tv-xz]/.test(text[i]))
+            else if( /[B-DF-HJ-NP-TV-XZb-df-hj-np-tv-xz]/.test(text[i])) //все согласные
                 consonants_counter++;
         }
         if(vowels_counter > consonants_counter)

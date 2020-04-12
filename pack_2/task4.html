@@ -22,23 +22,21 @@
         let str_replace = prompt("enter your text for replace");
         if(target_symbol.length > 1)
         {
-            alert("incurent input");
+            alert("incorrect input");
             continue;
         }
 
-        let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text = prompt("enter your text");
         let text_copy = text;
         
         let max_len = Number(text.length);
-
-
         for (let i = 0;  i < max_len; i++ )
         {
             if(text[i] == target_symbol)
             {
-                let line_begining = text.substring(0,i + 1);
+                let line_begining = text.substring(0,i + 1);  //нарезаем строку на два куска - до нужного символа и после
                 let line_ending = text.substring(i + 1);
-                text = line_begining + str_replace + line_ending;
+                text = line_begining + str_replace + line_ending;  //склеиваем два куска, между ними вставив нужную подстроку
                 max_len += str_replace.length
                 i += str_replace.length
             }

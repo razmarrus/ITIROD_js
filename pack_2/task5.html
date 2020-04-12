@@ -18,31 +18,26 @@
 
     while(true)
     {
-        let target_str = "а"//= prompt("enter target symbol");
-        let str_replace = "qwer"//= prompt("enter your text for replace");
+        let target_str = prompt("enter target symbol");
+        let str_replace = prompt("enter your text for replace");
 
-        let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text = prompt("enter your text");
         let text_copy = text;
 
         let tagList = text.split( /\s+/);
         let counter = 0;
         for(key in tagList)
         {
-
-            if (tagList[key].endsWith(target_str))
+            if (tagList[key].endsWith(target_str))  //если строка заканчивается на определенную подстроку
             {
                 counter = counter + tagList[key].length;
-                let line_begining = text.substring(0,counter );
+                let line_begining = text.substring(0,counter );  //нарезаем строку и вставляем между ее кусоков нужную подстроку
                 let line_ending = text.substring(counter  );
                 text = line_begining + str_replace + line_ending;
                 counter = counter +  str_replace.length + 1 ;
                 continue;
             }
             counter = counter + tagList[key].length;
-            /*let line_begining = text.substring(0,counter );
-            let line_ending = text.substring(counter );
-            text = line_begining  + line_ending;
-            alert(line_begining + "qwer" + line_ending);*/
             counter +=1;
         }
 

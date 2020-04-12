@@ -25,21 +25,21 @@
         let double_len = Number(text.length) * 2;
 
         for (let i = 0;  i < double_len; i++ )
-        {
             text = text.replace(re_punct, ' ');
-        }
 
         let tagList = text.split( /\s+/);
         for(key in tagList){
             let word = tagList[key]
-            if(word[0] == word[word.length -1]){
-                if (!arr.includes(word)) {
-                    arr.push(word);
+            if(word[0] == word[word.length -1]){  //если у слова первая и последняя буква совпадают
+                if (!arr.includes(word)) {  //и это слова еще не учли
+                    arr.push(word);         //запоминаем его
                 }
             }
         }
-
-        alert(`words that begin and end with same letter: ${arr}`)
+        if(arr.length == 0)
+            alert(`there are no words that begin and end with same letter`)
+        else
+            alert(`words that begin and end with same letter: ${arr}`)
     }
 
 </script>

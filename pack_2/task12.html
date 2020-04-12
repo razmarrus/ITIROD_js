@@ -19,21 +19,20 @@
     while(true)
     {
         let text = prompt("enter text");
-        let char_map = {};
+        let char_map = {};  //создаем словарь
 
-        for (let i = 0;  i < text.length; i++ )
+        for (let i = 0;  i < text.length; i++ )  //идем посимвольно
         {
-            if (char_map.hasOwnProperty(text[i])) 
+            if (char_map.hasOwnProperty(text[i]))    //если символ уже встречался - увеличиваем число вхождений
                 char_map[text[i]]++;
             else 
-                char_map[text[i]] = 1;
+                char_map[text[i]] = 1; //если символа еще нет в словаре - добавляем
         }
 
-        let map_values = Object.values(char_map)
+        let map_values = Object.values(char_map)  //поэтому питон лучше
         let map_keys = Object.keys(char_map)
         let max_map_value = Math.max(...Object.values(char_map))
-        
-        //alert(char_map);
+
         alert(`most used character: ${ map_keys[map_values.indexOf(max_map_value)]}`)
     }
 

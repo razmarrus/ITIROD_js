@@ -19,16 +19,13 @@
     while(true)
     {
         let target_lenght = prompt("enter target lenght");
-        //let str_replace = prompt("enter your text for replace");
-        //str_replace = " "+ str_replace + " ";
-
-        let text = "this q is si some  aw random text qw re so "//" Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text = prompt("enter your text");//"this q is si some  aw random text qw re so "
         let text_copy = text;
 
-        let tagList = text.split( /\s+/);
+        let tagList = text.split( /\s+/);  //делим на слова
         for(key in tagList){
 
-            if(tagList[key].length == target_lenght && /^[^AEIOYaeiouy]/.test(tagList[key])){ 
+            if(tagList[key].length == target_lenght && /^[^AEIOYaeiouy]/.test(tagList[key])){ //если начинается не с гласной и имеет заданную длинну
 
                 let junk = String("\\s+" + String(tagList[key]) + "\\s+");
                 let buffer = new RegExp(junk);

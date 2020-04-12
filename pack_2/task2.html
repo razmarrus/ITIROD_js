@@ -22,29 +22,24 @@
         let str_replace = prompt("enter your text for replace");
         str_replace = " "+ str_replace + " ";
 
-        let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text = prompt("enter your text");
         let text_copy = text;
-        let re_punct= /[,.!?;:()]/; ///[,.!?;:()\s*,\s*]/ 
-        
-        //text = text.replace(/,/g, ''); //удаляем запятые
-        //let re = /\s*,\s*/
+        let re_punct= /[,.!?;:()]/;
 
         let max_len = Number(text.length) * 2;
 
-        for (let i = 0;  i < max_len; i++ )
-        {
+        for (let i = 0;  i < max_len; i++ )         //удаляем знаки припинания
             text = text.replace(re_punct, ' ');
-        }
 
-        let tagList = text.split( /\s+/);
+        let tagList = text.split( /\s+/);   //получаем слова в виде массива
         for(key in tagList){
             if(tagList[key].length  == target_lenght){
 
-                let junk = String("\\s+" + String(tagList[key]) + "\\s+");
+                let junk = String("\\s+" + String(tagList[key]) + "\\s+");  //ставим запятые вокруг слова (иначе будут баги)
                 let buffer = new RegExp(junk);
-                alert(buffer);
+                //alert(buffer);
 
-                text = text.replace(buffer, str_replace);
+                text = text.replace(buffer, str_replace);  //удаляем
                 }
         }
 

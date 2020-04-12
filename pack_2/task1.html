@@ -18,11 +18,11 @@
 
     while(true)
     {
-        let price = 10;
+        let price = prompt("enter price per word");
         let text = prompt("enter your text");
         let counter = 0;
         
-        alert(Number(text.split(/\s+/).length) * price); 
+        alert(`price would be: ${Number(text.split(/\s+/).length) * price}`); 
     }
 
 </script>

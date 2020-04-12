@@ -19,20 +19,14 @@
     while(true)
     {
         let text = prompt("enter text");
-
-        //let text = " Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
         let text_copy = text;
         let re_punct= /[,.!?;:()]/; ///[,.!?;:()\s*,\s*]/ 
-        
-        //text = text.replace(/,/g, ''); //удаляем запятые
-        //let re = /\s*,\s*/
 
         let double_len = Number(text.length) * 2;
 
         for (let i = 0;  i < double_len; i++ )
-        {
             text = text.replace(re_punct, ' ');
-        }
+        
 
         let shortest_arr = [], longest_arr = [];
         let max_lenght = 0, min_lenght = 10000;
@@ -40,15 +34,15 @@
         let tagList = text.split( /\s+/);
         for(key in tagList) {
 
-            if( tagList[key].length == min_lenght)
+            if( tagList[key].length == min_lenght)  //если слово такой же длинны как минимальное - запоминаем
                 shortest_arr.push(tagList[key])
             else if ( tagList[key].length < min_lenght && tagList[key] != " " && tagList[key] != ""){
-                shortest_arr.length = 0;
-                shortest_arr.push(tagList[key]);
+                shortest_arr.length = 0;      //опустошаем список минимальных слов
+                shortest_arr.push(tagList[key]);  //добавляем новое
                 min_lenght = tagList[key].length;
             }
 
-            if( tagList[key].length == max_lenght)
+            if( tagList[key].length == max_lenght)  //почти тоже самое, что с минимальными
                 longest_arr.push(tagList[key])
             else if ( tagList[key].length > max_lenght && tagList[key] != " " && tagList[key] != ""){
                 longest_arr.length = 0;

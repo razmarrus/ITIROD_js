@@ -20,7 +20,7 @@
 
     while(true)
     {
-        let text = prompt("enter text");  //"qwe werty erw yq zzzz"; 
+        let text = prompt("enter text"); 
         let words_arr = [];
         let main_chain = [];
     
@@ -33,7 +33,7 @@
 
         let tagList = text.split( /\s+/);
         for(key in tagList)
-            words_arr.push(tagList[key])
+            words_arr.push(tagList[key])  //все слова из предложения
 
         let n = words_arr.length
 
@@ -44,7 +44,7 @@
             chain_matrix[i]= [];
         }
 
-
+        
         for(let i = 0; i < n; i++)
         {
             for(let j = 0; j < n; j++)
@@ -82,21 +82,21 @@
             }
         }*/
 
-        //для вариантов, начинающихся с разных слов
+        //для вариантов, начинающихся с разных слов (прогоняем все возможные варинты, созданные выше)
         for(let i = 0; i < n -1; i++)
         {
-            let words_matrix_layer = words_matrix[i];
+            let words_matrix_layer = words_matrix[i];   //массив всех остальных слов предложения, без первого (для конкретного i-го кейса)
             for(let k = 0; k < n -1; k++){
 
-                for(let x = 0; x < words_matrix_layer.length; x++)
+                for(let x = 0; x < words_matrix_layer.length; x++)  //идем по всем словам
                 {
-                    let last_word_current_layer = chain_matrix[i][chain_matrix[i].length -1];//= chain_matrix[i][buffer]
-                    let current_key_word = words_matrix_layer[x];
+                    let last_word_current_layer = chain_matrix[i][chain_matrix[i].length -1];//текущее анализируемое слове
+                    let current_key_word = words_matrix_layer[x];  //слово из предложения
 
-                    if(last_word_current_layer[last_word_current_layer.length -1] == current_key_word[0])
+                    if(last_word_current_layer[last_word_current_layer.length -1] == current_key_word[0])  //если последняя буква анализируемого слова == первая буква слова из предложения
                     {
-                        chain_matrix[i].push(current_key_word)
-                        words_matrix_layer.splice(x, 1)
+                        chain_matrix[i].push(current_key_word)  //добавляем слово из предложения к ключевым (оно становится анализирумым теперь)
+                        words_matrix_layer.splice(x, 1)  //удаляем его же массива слов для этого предложения
 
                         break;
                     }
@@ -107,16 +107,15 @@
         }
 
         let max_chain_len = 0;
-        for(let i =0; i < chain_matrix.length; i++)
+        for(let i =0; i < chain_matrix.length; i++)  //поиск максимальной цепочки
         {
             if(max_chain_len < chain_matrix[i].length)
                 max_chain_len = chain_matrix[i].length;
         }    
-            //alert(chain_matrix[i].length)
         
         for(let i = 0; i < chain_matrix.length; i++)
         {
-            if(max_chain_len == chain_matrix[i].length) 
+            if(max_chain_len == chain_matrix[i].length)  //если несколько цепочек одинаковой длинны
                 alert(`chain of max len: ${chain_matrix[i]}`)
                 //max_chain_len = chain_matrix[i].length;
         }    

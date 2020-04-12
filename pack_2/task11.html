@@ -18,22 +18,20 @@
 
     while(true)
     {
-        let text = prompt("enter text");//"this q is si some  aw random text qw re so "//" Это была прекрасная весна. Зима была не так хороша, а осень просто отвратна. ";
+        let text = prompt("enter text");//"this q is si some  aw random text qw re so "
         let text_copy = text;
         let arr = [];
 
         let re_punct= /[,.!?;:()]/;
         let double_len = Number(text.length) * 2;
 
-        for (let i = 0;  i < double_len; i++ )
-        {
+        for (let i = 0;  i < double_len; i++ )  //убираем знаки припинания
             text = text.replace(re_punct, ' ');
-        }
 
         let tagList = text.split( /\s+/);
         for(key in tagList){
 
-            if(/^[AEIOYaeiouy]/.test(tagList[key]) && /[AEIOYaeiouy]$/.test(tagList[key]))
+            if(/^[AEIOYaeiouy]/.test(tagList[key]) && /[AEIOYaeiouy]$/.test(tagList[key]))  //если слово начинается и заканчивается глассной
                 arr.push(tagList[key])
         }
 

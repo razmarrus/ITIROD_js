@@ -29,11 +29,11 @@
             text = text.replace(re_punct, ' ');
         }
 
-        let sentences = text.split( /[.!?]/);
+        let sentences = text.split( /[.!?]/);  //знаки конца предложения
         let n = sentences.length
-        let sentences_map =new Array(n);
+        let sentences_map =new Array(n);      //создаем массив (он будет массивом словарей)
 
-        for (var i=0; i<n; i++) {  //словари в массиве
+        for (var i=0; i<n; i++) {               //словари в массиве
             sentences_map[i] = new Map() 
         }
         
@@ -42,9 +42,9 @@
             let tagList = sentences[i].split( /\s+/);
             for(key in tagList)
             {
-                if(tagList[key] == "" || tagList[key] == " ")
+                if(tagList[key] == "" || tagList[key] == " ")   
                     continue;
-                /*if (sentences_map[i].hasOwnProperty(tagList[key])) 
+                /*if (sentences_map[i].hasOwnProperty(tagList[key]))  //синтаксис js делает меня печальным человеком
                 {
                     let old_value = Number(sentences_map[i].get(tagList[key]));
                     old_value++;
@@ -92,13 +92,6 @@
                 max_index = i;
             }
         }
-
-
-        /*for(let i =0; i< n;i++){
-            for (var [key, value] of sentences_map[i]) {
-                alert(`${i}:${key} + ' = ' + ${value}`);
-            }
-        }*/
 
 
         if(max == 0)
