@@ -27,7 +27,6 @@
     "use strict";
 
 
-
     class Room {
         constructor(patients, room_capacity){
             this.patients = patients;
@@ -48,86 +47,105 @@
     }
 
     
-    function placePatients(patients, diagnosis_map, room_list, rooms_left, room_capacity)
+    function placePatients(patients, diagnosis_map, rooms_list, rooms_left, room_capacity)
     {
-            while(rooms_left > 0 && patients.lenght > 0)
+        let patients_left = Object.keys(patients).length
+        let sysle_coonter = 0;
+        //alert(`rooms_left > 0 && patients.lenght:  ${rooms_left}; ${patients_left}`)
+        while(rooms_left > 0 && patients_left >= 0)
+        {
+            //alert(`sysle no: ${sysle_coonter}; patients left ${patients_left}`)
+            /*if(patients_left < room_capacity)
             {
+                alert("3: patients_left < room_capacity")
+                let patients_in_new_room = [];
+                for(let i =0;i < patients_left;i++)
+                    patients_in_new_room.push(patients[i]);
+                let new_room = new Room(patients_in_new_room, patients_left);//room_capacity);
+                rooms_list.push(new_room);
+                rooms_left--;
+                break;
+            }*/
 
-                if(patients.lenght < room_capacity)
+            let res_buffer = maxDiagnosisKeyAndValue(diagnosis_map);
+            let max_diagnosis_key = res_buffer[0], max_diagnosis_value = res_buffer[1] //здесь могут быть проблемы
+            //alert(`maxDiagnosisKeyAndValue: ${max_diagnosis_key}, ${max_diagnosis_value}`)
+
+            if(max_diagnosis_value >= room_capacity)
+            {
+                //alert("1: max_diagnosis_value >= room_capacity")
+                let patients_in_new_room = [];
+                let counter = 0;
+                while( patients_in_new_room.length <= room_capacity && counter < patients_left)
                 {
-                    let patients_in_new_room = [];
-                    for(let i =0;i < patients.lenght;i++)
-                        patients_in_new_room.push(patients[i]);
-                    let new_room = new Room(patients_in_new_room, patients.lenght);
-                    rooms_list.push(new_room);
-                    rooms_left--;
-                    break;
-                }
-
-                let res_buffer = maxDiagnosisKeyAndValue(diagnosis_map);
-                let max_diagnosis_key = res_buffer[0], max_diagnosis_value = res_buffer[1] //здесь могут быть проблемы
-
-                if(max_diagnosis_value >= room_capacity)
-                {
-                    let patients_in_new_room = [];
-                    let counter = 0;
-                    while( patients_in_new_room.length < room_capacity && counter < patients.lenght)
+                    if(patients[counter].diagnosis == max_diagnosis_key)
                     {
-                        if(patients[counter].diagnosis == max_diagnosis_key)
-                        {
-                            patients_in_new_room.push(patients[counter]);
-                            let del_index = patients_in_new_room.indexOf(patients[counter]);
-                            patients.splice(del_index, 1);    
-                        }
-                        counter++;
-                    }
-                    let new_room = new Room(patients_in_new_room, room_capacity);
-                    rooms_list.push(new_room);
-                    rooms_left--;
-                    diagnosis_map.set(max_diagnosis_key,max_diagnosis_value - room_capacity);
-                }
-                else
-                {
-                    let patients_in_new_room = [];
-                    let counter_person_in_room = 0;
-                    while(counter_person_in_room < room_capacity)
-                    {
-                        res_buffer = maxDiagnosisKeyAndValue(diagnosis_map);
-                        max_diagnosis_key = res_buffer[0], max_diagnosis_value = res_buffer[1] 
+                        patients[counter].room_number = rooms_left;
+                        patients_in_new_room.push(patients[counter]);
                         
-                        for(let i = 0; i < patients.lenght; i++)
-                        {
-                            if(patients[i].diagnosis == max_diagnosis_key)
-                            {
-                                patients_in_new_room.push(patients[i]);
-                                let del_index = patients_in_new_room.indexOf(patients[i]);
-                                patients.splice(del_index, 1);  
-                                counter_person_in_room++;  
-
-                                max_diagnosis_value--;
-                                diagnosis_map.set(max_diagnosis_key, max_diagnosis_value)
-                            }
-                            if(counter_person_in_room >= room_capacity)
-                                break;
-                        }
-
+                        //let del_index = patients.indexOf(patients[counter]);
+                        patients_left--;
+                        //patients.splice(del_index, 1); 
+                        patients.splice(counter, 1);
+                        counter--;
+                        //alert(`deleting thing; ${patients_in_new_room.length} patients_in_new_room.length`)   
                     }
-                    let new_room = new Room(patients_in_new_room, room_capacity);
-                    rooms_list.push(new_room);
-                    rooms_left--;
+                    counter++;
                 }
-
+                let new_room = new Room(patients_in_new_room, room_capacity);
+                rooms_list.push(new_room);
+                rooms_left--;
+                diagnosis_map.set(max_diagnosis_key,max_diagnosis_value - room_capacity);
             }
-            //alert(rooms_list)
-            //return rooms_list;  //также вернуть rooms left
+            else
+            {
+                //alert("2: max dis < room cap")
+                let patients_in_new_room = [];
+                let counter_person_in_room = 0;
+                while(patients_in_new_room.length < room_capacity && patients_left > 0)
+                {
+                    res_buffer = maxDiagnosisKeyAndValue(diagnosis_map);
+                    max_diagnosis_key = res_buffer[0], max_diagnosis_value = res_buffer[1] 
+                    if(max_diagnosis_value < 1)
+                        break;
+                    //alert(`maxDiagnosisKeyAndValue: ${max_diagnosis_key}, ${max_diagnosis_value}, ${patients_left}`)
+                    for(let i = 0; i < patients_left; i++)
+                    {
+                        //alert(`${patients[i].diagnosis} == ${max_diagnosis_key}, max_diagnosis_value: ${max_diagnosis_value}`)
+                        if(patients[i].diagnosis == max_diagnosis_key && max_diagnosis_value > 0)
+                        {
+                            patients[i].room_number = rooms_left;
+                            patients_in_new_room.push(patients[i]);
+                            //let del_index = patients.indexOf(patients[i]);
+                            patients.splice(i, 1);  
+                            i--;
+                            patients_left--;
+                            //counter_person_in_room++;  
+
+                            max_diagnosis_value--;
+                            diagnosis_map.set(max_diagnosis_key, max_diagnosis_value)
+                        }
+                        if(patients_in_new_room.length >= room_capacity){
+                            //alert("I WANT TO BREAK FREE")
+                            break;
+                        }
+                    }
+                }
+                let new_room = new Room(patients_in_new_room, room_capacity);
+                rooms_list.push(new_room);
+                rooms_left--;
+                //alert("new_room1")
+            }
+            sysle_coonter++;
         }
+        alert("Patient placing ended");
+    }
 
 
         function maxDiagnosisKeyAndValue(diagnosis_map)
         {
             let max_diagnosis_key = 0, max_diagnosis_value = 0;
             for (var [key, value] of diagnosis_map.entries()) {
-            //console.log(key + ' = ' + value);
                 if(value > max_diagnosis_value)
                 {
                     max_diagnosis_value = value;
@@ -139,19 +157,12 @@
 
         function genderDivision(same_patients,patients, gender)
         {
-            //alert("gender stuff")
-            //let same_patients = [];
+
             for(let key in patients)
             {
                 if(String(patients[key].gender) == String(gender))
                     same_patients.push(patients[key]);
-                //alert(patients[key].first_name)
             }
-            
-            //for(key in same_patients)//(let i =0; i < same_patients.length; i++)
-            //    alert(`females: ${same_patients[key].first_name}`)
-        
-            //return same_patients;
         }
 
         function diagnosisClastering(diagnosis_map, patients)
@@ -164,7 +175,7 @@
                     diagnosis_map.set(patients[key].diagnosis, old_value)
                 }   
                 else 
-                    diagnosis_map.set(patients[key].diagnosis, 0)
+                    diagnosis_map.set(patients[key].diagnosis, 1)
             }
         }
 
@@ -194,12 +205,13 @@
 
         /*if(female_patients.constructor === Array)
             alert("fem array")*/
-        /*for(key in female_patients)
+        /*for(let key in female_patients)
             alert(String(female_patients[key].diagnosis))
         alert(female_patients.length)*/
         
         let female_diagnosis_map = new Map();
         diagnosisClastering(female_diagnosis_map, female_patients);
+
 
         /*alert("diagnosis is complite")
         for (var [key, value] of female_diagnosis_map.entries()) {
@@ -207,12 +219,24 @@
         }*/
         let female_rooms = [];
         placePatients(female_patients, female_diagnosis_map, female_rooms, rooms_left,room_capacity);
-        room_capacity -= female_rooms.lenght
+
+        rooms_left -= female_rooms.lenght;
+
+        
+        //alert("parients:")
+        for(let key in female_rooms)
+        {
+            let single_room = female_rooms[key]
+            for(let p in single_room.patients)
+                alert(`${single_room.patients[p].first_name} is in the room no ${single_room.patients[p].room_number} `)   
+        }
 
         /*let male_patients = genderDivision(patients, "male");
         let male_diagnosis_map = diagnosisClastering(male_patients);
         let male_rooms = placePatients(male_patients, male_diagnosis_map, rooms_left, room_capacity);
         */
+        alert("this is the end")
+
     }
 
 </script>
