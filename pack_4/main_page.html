@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>task no. 1</title>
+        <meta charset="UTF-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i%7cWork+Sans:400,500,700" rel="stylesheet" type="text/css">
+
+    </head>
+
+<body>
+
+<!-- В больнице имеется общий список больных. Каждый пункт списка содержит:
+     ФИО больного, пол больного, возраст, диагноз, номер палаты 
+     (при добавлении поле пустое). 
+     
+     Требуется:  разместить больных по палатам так, чтобы больные с одинаковым диагнозом располагались, по возможности, 
+     в одной палате. При этом разнополых больных в одну палату размещать нельзя. 
+     После размещения выдать список больных, которых не удалось разместить в палаты, с указанием ФИО больного, 
+     пола больного, возраста, диагноза;  осуществлять поиск больных по номеру палаты, диагнозу, ФИО-->
+
+
+<p>Task no. 1</p>
+
+<script>
+    "use strict";
+
+
+
+    class Room {
+        constructor(patients, room_capacity){
+            this.patients = patients;
+            this.room_capacity = room_capacity;
+        }
+    }
+
+    class Patient {
+        constructor(first_name, second_name, third_name, gender, age, diagnosis){
+            this.first_name = first_name;
+            this.second_name = second_name;
+            this.third_name = third_name; 
+            this.gender = gender; 
+            this.age = age; 
+            this.room_number = "No information"; 
+            this.diagnosis = diagnosis;
+        }
+    }
+
+    
+    function placePatients(patients, diagnosis_map, room_list, rooms_left, room_capacity)
+    {
+            while(rooms_left > 0 && patients.lenght > 0)
+            {
+
+                if(patients.lenght < room_capacity)
+                {
+                    let patients_in_new_room = [];
+                    for(let i =0;i < patients.lenght;i++)
+                        patients_in_new_room.push(patients[i]);
+                    let new_room = new Room(patients_in_new_room, patients.lenght);
+                    rooms_list.push(new_room);
+                    rooms_left--;
+                    break;
+                }
+
+                let res_buffer = maxDiagnosisKeyAndValue(diagnosis_map);
+                let max_diagnosis_key = res_buffer[0], max_diagnosis_value = res_buffer[1] //здесь могут быть проблемы
+
+                if(max_diagnosis_value >= room_capacity)
+                {
+                    let patients_in_new_room = [];
+                    let counter = 0;
+                    while( patients_in_new_room.length < room_capacity && counter < patients.lenght)
+                    {
+                        if(patients[counter].diagnosis == max_diagnosis_key)
+                        {
+                            patients_in_new_room.push(patients[counter]);
+                            let del_index = patients_in_new_room.indexOf(patients[counter]);
+                            patients.splice(del_index, 1);    
+                        }
+                        counter++;
+                    }
+                    let new_room = new Room(patients_in_new_room, room_capacity);
+                    rooms_list.push(new_room);
+                    rooms_left--;
+                    diagnosis_map.set(max_diagnosis_key,max_diagnosis_value - room_capacity);
+                }
+                else
+                {
+                    let patients_in_new_room = [];
+                    let counter_person_in_room = 0;
+                    while(counter_person_in_room < room_capacity)
+                    {
+                        res_buffer = maxDiagnosisKeyAndValue(diagnosis_map);
+                        max_diagnosis_key = res_buffer[0], max_diagnosis_value = res_buffer[1] 
+                        
+                        for(let i = 0; i < patients.lenght; i++)
+                        {
+                            if(patients[i].diagnosis == max_diagnosis_key)
+                            {
+                                patients_in_new_room.push(patients[i]);
+                                let del_index = patients_in_new_room.indexOf(patients[i]);
+                                patients.splice(del_index, 1);  
+                                counter_person_in_room++;  
+
+                                max_diagnosis_value--;
+                                diagnosis_map.set(max_diagnosis_key, max_diagnosis_value)
+                            }
+                            if(counter_person_in_room >= room_capacity)
+                                break;
+                        }
+
+                    }
+                    let new_room = new Room(patients_in_new_room, room_capacity);
+                    rooms_list.push(new_room);
+                    rooms_left--;
+                }
+
+            }
+            //alert(rooms_list)
+            //return rooms_list;  //также вернуть rooms left
+        }
+
+
+        function maxDiagnosisKeyAndValue(diagnosis_map)
+        {
+            let max_diagnosis_key = 0, max_diagnosis_value = 0;
+            for (var [key, value] of diagnosis_map.entries()) {
+            //console.log(key + ' = ' + value);
+                if(value > max_diagnosis_value)
+                {
+                    max_diagnosis_value = value;
+                    max_diagnosis_key = key;
+                }
+            }
+            return [max_diagnosis_key, max_diagnosis_value];
+        }
+
+        function genderDivision(same_patients,patients, gender)
+        {
+            //alert("gender stuff")
+            //let same_patients = [];
+            for(let key in patients)
+            {
+                if(String(patients[key].gender) == String(gender))
+                    same_patients.push(patients[key]);
+                //alert(patients[key].first_name)
+            }
+            
+            //for(key in same_patients)//(let i =0; i < same_patients.length; i++)
+            //    alert(`females: ${same_patients[key].first_name}`)
+        
+            //return same_patients;
+        }
+
+        function diagnosisClastering(diagnosis_map, patients)
+        {
+            for(let key in patients){
+                if(diagnosis_map.has(patients[key].diagnosis))
+                {
+                    let old_value = Number(diagnosis_map.get(patients[key].diagnosis));
+                    old_value +=1;
+                    diagnosis_map.set(patients[key].diagnosis, old_value)
+                }   
+                else 
+                    diagnosis_map.set(patients[key].diagnosis, 0)
+            }
+        }
+
+    function main()
+    {
+        //alert("initializing started");
+        let patients = [], rooms_left = 5, room_capacity = 2;
+        let person1 = new Patient("Francis", "Ford", "Coppola", "male", 81, "dis");  
+        let person2 = new Patient("Augusta","Ada","Lovelace","female",36,"cancer");
+        let person3 = new Patient("Elvis","Aaron","Presley","male",42,"insomnia");
+        let person4 = new Patient("Nancy","Sandra","Sinatra","female",79,"Stroke");
+        let person5 = new Patient("Wassily","Wassilyevich","Kandinsky","male",77,"Stroke")
+        let person6 = new Patient("Svetlana","Yuryevna","Martynchik","female", 55, "Stroke") 
+        let person7 = new Patient("Madeleine","Korbel","Albright","female",82, "trump")
+        let person8 = new Patient("Marie","Curie","Skłodowska","female", 66, "trump")
+        patients.push(person1);
+        patients.push(person2);
+        patients.push(person3);
+        patients.push(person4);
+        patients.push(person5);
+        patients.push(person6);
+        patients.push(person7);
+        patients.push(person8);
+
+        let female_patients = [];
+        genderDivision(female_patients, patients,"female");
+
+        /*if(female_patients.constructor === Array)
+            alert("fem array")*/
+        /*for(key in female_patients)
+            alert(String(female_patients[key].diagnosis))
+        alert(female_patients.length)*/
+        
+        let female_diagnosis_map = new Map();
+        diagnosisClastering(female_diagnosis_map, female_patients);
+
+        /*alert("diagnosis is complite")
+        for (var [key, value] of female_diagnosis_map.entries()) {
+            alert(`${key} + ${value}`)
+        }*/
+        let female_rooms = [];
+        placePatients(female_patients, female_diagnosis_map, female_rooms, rooms_left,room_capacity);
+        room_capacity -= female_rooms.lenght
+
+        /*let male_patients = genderDivision(patients, "male");
+        let male_diagnosis_map = diagnosisClastering(male_patients);
+        let male_rooms = placePatients(male_patients, male_diagnosis_map, rooms_left, room_capacity);
+        */
+    }
+
+</script>
+
+<table class="consumed_components_table">
+    <tbody>
+        <tr> 
+            <td>First name</td>
+            <td>Second name</td>
+            <td>Third name</td>
+            <td>Gender</td>
+            <td>Age</td>
+            <td>Diagnosis</td>
+            <td>Room no.</td>
+        </tr> 
+        <tr > 
+            <td id="fname">Francis</td>
+            <td id="sname">Ford</td>
+            <td id="tname">Coppola</td>
+            <td id="gender_table">male</td>
+            <td id="age_table">81</td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>         
+        <tr > 
+            <td id="fname">Augusta</td>
+            <td id="sname">Ada</td>
+            <td id="tname">Lovelace</td>
+            <td id="gender_table">female</td>
+            <td id="age_table">36</td> 
+            <td id="diagnosis_table">cancer</td>
+            <td id="room_table"></td>
+        </tr>         
+        <tr > 
+            <td id="fname">Elvis</td>
+            <td id="sname">Aaron</td>
+            <td id="tname">Presley</td>
+            <td id="gender_table">male</td>
+            <td id="age_table">42</td> 
+            <td id="diagnosis_table">insomnia</td>
+            <td id="room_table"></td>
+        </tr>         
+        <tr > 
+            <td id="fname">Nancy</td>
+            <td id="sname">Sandra</td>
+            <td id="tname">Sinatra</td>
+            <td id="gender_table">female</td>
+            <td id="age_table">79</td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname">Wassily</td>
+            <td id="sname">Wassilyevich </td>
+            <td id="tname">Kandinsky </td>
+            <td id="gender_table">male</td>
+            <td id="age_table">77</td> 
+            <td id="diagnosis_table">Stroke</td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname">Svetlana</td>
+            <td id="sname">Yuryevna</td>
+            <td id="tname">Martynchik</td>
+            <td id="gender_table">famele</td>
+            <td id="age_table">55</td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname">Madeleine</td>
+            <td id="sname">Korbel</td>
+            <td id="tname">Albright</td>
+            <td id="gender_table">female</td>
+            <td id="age_table">82</td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname">Marie</td>
+            <td id="sname">Curie</td>
+            <td id="tname">Skłodowska</td>
+            <td id="gender_table">female</td>
+            <td id="age_table">66</td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname"></td>
+            <td id="sname"></td>
+            <td id="tname"></td>
+            <td id="gender_table"></td>
+            <td id="age_table"></td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname"></td>
+            <td id="sname"></td>
+            <td id="tname"></td>
+            <td id="gender_table"></td>
+            <td id="age_table"></td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        <tr > 
+            <td id="fname"></td>
+            <td id="sname"></td>
+            <td id="tname"></td>
+            <td id="gender_table"></td>
+            <td id="age_table"></td> 
+            <td id="diagnosis_table"></td>
+            <td id="room_table"></td>
+        </tr>  
+        </tbody>
+    </table>
+
+<button onclick="main()">BUTTTONBUTTONBUTTON</button>
+
+<p>Task is complete.</p>
+
+</body>
+
+</html>
+
+
