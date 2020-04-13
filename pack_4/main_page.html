@@ -25,11 +25,13 @@
 
 <script src="models.js"></script>
 <script src="main_functions.js"></script>
+<script src="data_initialization.js"></script>
 
 
 <table class="consumed_components_table">
     <tbody>
         <tr> 
+            <td>№</td>
             <td>First name</td>
             <td>Second name</td>
             <td>Third name</td>
@@ -39,108 +41,134 @@
             <td>Room no.</td>
         </tr> 
         <tr > 
-            <td id="fname">Francis</td>
-            <td id="sname">Ford</td>
-            <td id="tname">Coppola</td>
-            <td id="gender_table">male</td>
-            <td id="age_table">81</td> 
-            <td id="diagnosis_table"></td>
-            <td id="patient1"></td>
+            <td id="number1">1</td>
+            <td><input id="fname1" type="text" size="20" value="Francis"></td>
+            <td><input id="sname1" type="text" size="20" value="Ford"></td>
+            <td><input id="tname1" type="text" size="20" value="Coppola"></td>
+            <td><input id="gender_table1" type="text" size="20" value="male"></td>
+            <td><input id="age_table1" type="text" size="20" value="81"></td> 
+            <td><input id="diagnosis_table1" type="text" size="20" value="lupus"></td>
+            <td id="room_number1"></td>
         </tr>         
         <tr > 
-            <td id="fname">Augusta</td>
-            <td id="sname">Ada</td>
-            <td id="tname">Lovelace</td>
-            <td id="gender_table">female</td>
-            <td id="age_table">36</td> 
-            <td id="diagnosis_table">cancer</td>
-            <td id="patient2"></td>
+            <td id="number2">2</td>
+            <td> <input id="fname2" type="text" size="20" value="August"></td>
+            <td><input id="sname2" type="text" size="20" value="Ada"></td>
+            <td><input id="tname2" type="text" size="20" value="Lovelace"></td>
+            <td><input id="gender_table2" type="text" size="20" value="female"></td>
+            <td><input id="age_table2" type="text" size="20" value="36"></td> 
+            <td><input id="diagnosis_table2" type="text" size="20" value="cancer"></td>
+            <td id="room_number2"></td>
         </tr>         
         <tr > 
-            <td id="fname">Elvis</td>
-            <td id="sname">Aaron</td>
-            <td id="tname">Presley</td>
-            <td id="gender_table">male</td>
-            <td id="age_table">42</td> 
-            <td id="diagnosis_table">insomnia</td>
-            <td id="patient3"></td>
+            <td id="number3">3</td>
+            <td><input id="fname3" type="text" size="20" value="Elvis"></td>
+            <td><input id="sname3" type="text" size="20" value="Aaron"></td>
+            <td><input id="tname3" type="text" size="20" value="Presley"></td>
+            <td><input id="gender_table3" type="text" size="20" value="male"></td>
+            <td><input id="age_table3" type="text" size="20" value="42"></td> 
+            <td><input id="diagnosis_table3" type="text" size="20" value="insomnia"></td>
+            <td id="room_number3"></td>
         </tr>         
         <tr > 
-            <td id="fname">Nancy</td>
-            <td id="sname">Sandra</td>
-            <td id="tname">Sinatra</td>
-            <td id="gender_table">female</td>
-            <td id="age_table">79</td> 
-            <td id="diagnosis_table"></td>
-            <td id="patient4"></td>
+            <td id="number4">4</td>
+            <td><input id="fname4" type="text" size="20" value="Nancy"></td>
+            <td><input id="sname4" type="text" size="20" value="Sandra"></td>
+            <td><input id="tname4" type="text" size="20" value="Sinatra"></td>
+            <td><input id="gender_table4" type="text" size="20" value="female"></td>
+            <td><input id="age_table4" type="text" size="20" value="79"></td> 
+            <td><input id="diagnosis_table4" type="text" size="20" value="stroke"></td>
+            <td id="room_number4"></td>
         </tr>  
         <tr > 
-            <td id="fname">Wassily</td>
-            <td id="sname">Wassilyevich </td>
-            <td id="tname">Kandinsky </td>
-            <td id="gender_table">male</td>
-            <td id="age_table">77</td> 
-            <td id="diagnosis_table">Stroke</td>
-            <td id="patient5"></td>
+            <td id="number5">5</td>
+            <td><input id="fname5" type="text" size="20" value="Wassily"></td>
+            <td><input id="sname5" type="text" size="20" value="Wassilyevich"></td>
+            <td><input id="tname5" type="text" size="20" value="Kandinsky"></td>
+            <td><input id="gender_table5" type="text" size="20" value="male"></td>
+            <td><input id="age_table5" type="text" size="20" value="77"></td> 
+            <td><input id="diagnosis_table5" type="text" size="20" value="stroke"></td>
+            <td id="room_number5"></td>
         </tr>  
         <tr > 
-            <td id="fname">Svetlana</td>
-            <td id="sname">Yuryevna</td>
-            <td id="tname">Martynchik</td>
-            <td id="gender_table">famele</td>
-            <td id="age_table">55</td> 
-            <td id="diagnosis_table"></td>
-            <td id="patient6"></td>
+            <td id="number6">6</td>
+            <td><input id="fname6" type="text" size="20" value="Svetlana"></td>
+            <td><input id="sname6" type="text" size="20" value="Yuryevna"></td>
+            <td><input id="tname6" type="text" size="20" value="Martynchik"></td>
+            <td><input id="gender_table6" type="text" size="20" value="female"></td>
+            <td><input id="age_table6" type="text" size="20" value="55"></td> 
+            <td><input id="diagnosis_table6" type="text" size="20" value="stroke"></td>
+            <td id="room_number6"></td>
         </tr>  
         <tr > 
-            <td id="fname">Madeleine</td>
-            <td id="sname">Korbel</td>
-            <td id="tname">Albright</td>
-            <td id="gender_table">female</td>
-            <td id="age_table">82</td> 
-            <td id="diagnosis_table"></td>
-            <td id="patient7"></td>
+            <td id="number">7</td>
+            <td><input id="fname7" type="text" size="20" value="Madeleine"></td>
+            <td><input id="sname7" type="text" size="20" value="Korbel"></td>
+            <td><input id="tname7" type="text" size="20" value="Albright"></td>
+            <td><input id="gender_table7" type="text" size="20" value="female"></td>
+            <td><input id="age_table7" type="text" size="20" value="82"></td> 
+            <td><input id="diagnosis_table7" type="text" size="20" value="flu"></td>
+            <td id="room_number7"></td>
+        </tr>  
+        <tr >
+            <td id="number8">8</td> 
+            <td><input id="fname8" type="text" size="20" value="Marie"></td>
+            <td><input id="sname8" type="text" size="20" value="Curie"></td>
+            <td><input id="tname8" type="text" size="20" value="Skłodowsk"></td>
+            <td><input id="gender_table8" type="text" size="20" value="female"></td>
+            <td><input id="age_table8" type="text" size="20" value="66"></td> 
+            <td><input id="diagnosis_table8" type="text" size="20" value="flu"></td>
+            <td id="room_number8"></td>
         </tr>  
         <tr > 
-            <td id="fname">Marie</td>
-            <td id="sname">Curie</td>
-            <td id="tname">Skłodowska</td>
-            <td id="gender_table">female</td>
-            <td id="age_table">66</td> 
-            <td id="diagnosis_table"></td>
-            <td id="patient8"></td>
+            <td id="number9">9</td>
+            <td><input id="fname9" type="text" size="20" value=""></td>
+            <td><input id="sname9" type="text" size="20" value=""></td>
+            <td><input id="tname9" type="text" size="20" value=""></td>
+            <td><input id="gender_table9" type="text" size="20" value=""></td>
+            <td><input id="age_table9" type="text" size="20" value=""></td> 
+            <td><input id="diagnosis_table9" type="text" size="20" value=""></td>
+            <td id="room_number9"></td>
         </tr>  
         <tr > 
-            <td id="fname"></td>
-            <td id="sname"></td>
-            <td id="tname"></td>
-            <td id="gender_table"></td>
-            <td id="age_table"></td> 
-            <td id="diagnosis_table"></td>
-            <td id="room_table"></td>
+            <td id="number10">10</td>
+            <td><input id="fname10" type="text" size="20" value=""></td>
+            <td><input id="sname10" type="text" size="20" value=""></td>
+            <td><input id="tname10" type="text" size="20" value=""></td>
+            <td><input id="gender_table10" type="text" size="20" value=""></td>
+            <td><input id="age_table10" type="text" size="20" value=""></td> 
+            <td><input id="diagnosis_table10" type="text" size="20" value=""></td>
+            <td id="room_number10"></td>
         </tr>  
         <tr > 
-            <td id="fname"></td>
-            <td id="sname"></td>
-            <td id="tname"></td>
-            <td id="gender_table"></td>
-            <td id="age_table"></td> 
-            <td id="diagnosis_table"></td>
-            <td id="room_table"></td>
-        </tr>  
-        <tr > 
-            <td id="fname"></td>
-            <td id="sname"></td>
-            <td id="tname"></td>
-            <td id="gender_table"></td>
-            <td id="age_table"></td> 
-            <td id="diagnosis_table"></td>
-            <td id="room_table"></td>
+            <td id="number11">11</td>
+            <td><input id="fname11" type="text" size="20" value=""></td>
+            <td><input id="sname11" type="text" size="20" value=""></td>
+            <td><input id="tname11" type="text" size="20" value=""></td>
+            <td><input id="gender_table11" type="text" size="20" value=""></td>
+            <td><input id="age_table11" type="text" size="20" value=""></td> 
+            <td><input id="diagnosis_table11" type="text" size="20" value=""></td>
+            <td id="room_number11"></td>
         </tr>  
         </tbody>
     </table>
 
-<button onclick="main()">BUTTTONBUTTONBUTTON</button>
+<button onclick="main()">Place patients into rooms</button>
+<button onclick="fromInitializingInfo()">initialize table</button>
+
+<!--<button onclick="getDataFromTable()">Data into table</button>-->
+<button onclick="findByName()">Find by name</button>
+<button onclick="findByRoom()">Find by room number</button>
+<button onclick="findByDiagnosis()">Find by diagnosis</button>
+
+<button onclick="sortByName()">Sort by name</button>
+<!--<button onclick="sortByRoom()">Sort by room_number</button>-->
+<button onclick="sortByDiagnosis()">Sort by diagnosis</button>
+
+<button onclick="clearTable()">clrear table</button>
+<button onclick="removePatient()">remove patient</button>
+
+
 
 
 </body>
